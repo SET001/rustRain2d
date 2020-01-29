@@ -1,0 +1,11 @@
+[package]
+name = "hello-rust"
+version = "0.1.0"
+authors = ["SET001 <settydark@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7.3"
+ggez = "0.5.1"
+mint = "0.5.4"
+cgmath = {version= "0.17", features=["mint"]}
