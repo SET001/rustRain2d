@@ -1,19 +1,17 @@
+#![allow(non_snake_case)]
+
+use cgmath;
 use ggez;
 use ggez::event;
 use ggez::graphics;
 use ggez::{Context, GameResult};
 use std::env;
 use std::path;
-use mint::Point2;
-use cgmath;
-use std::time::{Duration, SystemTime};
-use ggez::nalgebra as na;
 
-mod rain;
 mod blob;
+mod rain;
 
-use crate::rain::{Rain};
-use crate::blob::{Blob};
+use crate::rain::Rain;
 
 #[derive(Debug)]
 struct MainState {
@@ -29,20 +27,20 @@ impl MainState {
     MainState {
       text: String::from("asdsad"),
       tick: 0,
-      rain: Rain::new(20, 5.0)
+      rain: Rain::new(20, 5.0),
     }
   }
 
-  fn updateFps(&mut self){
+  fn updateFps(&mut self) {
     self.increaseTick();
     self.text = format!("Frame: {}", self.tick);
   }
 
-  fn increaseTick(&mut self){
+  fn increaseTick(&mut self) {
     self.tick += 1;
   }
 }
-impl event::EventHandler for MainState{
+impl event::EventHandler for MainState {
   fn update(&mut self, _ctx: &mut Context) -> GameResult {
     self.rain.update();
     Ok(())
@@ -54,10 +52,10 @@ impl event::EventHandler for MainState{
     let dest_point = cgmath::Point2::new(1.0, 10.0);
     let stext: &str = &self.text;
     let text = graphics::Text::new((stext, font, 48.0));
-    graphics::draw(ctx, &text, (dest_point,));
+    graphics::draw(ctx, &text, (dest_point,))?;
 
-    self.rain.draw(ctx);
-    
+    self.rain.draw(ctx)?;
+
     graphics::present(ctx)?;
     Ok(())
   }
